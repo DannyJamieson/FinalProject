@@ -1,5 +1,11 @@
 #include <ctime>
-#include "BaseUpdateBehaviour.h"
+#include "SFMLRenderWindow.h"
+#include "Physics.h"
+
+bool DoPhysics = true;
+
+
+
 
 short FixedUpdatesPerSecond = 50;//Updates per seconds
 
@@ -19,6 +25,7 @@ void CallUpdate() {  //call all updates
 
 void MainGameLoop() {
 	double LastFixedUpdate = clock();
+	Physics *i = new Physics();
 	while (true)
 	{
 		CallUpdate();
@@ -29,7 +36,9 @@ void MainGameLoop() {
 	}
 }
 
+
 int main() {
+	SFMLRenderWindow *i = new SFMLRenderWindow();
 	MainGameLoop();
 	return 0;
 }

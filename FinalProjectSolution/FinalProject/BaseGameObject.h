@@ -1,23 +1,20 @@
 #pragma once
+#include "SFML\Graphics.hpp"
+#include "Physics.h"
 #include <vector>
 class BaseGameObject
 {
 public:
-	struct Vector2
-	{
-		float x;
-		float y;
-	};
-	BaseGameObject();
+	BaseGameObject(bool);
 	~BaseGameObject();
+	//!List of game objects
 	static std::vector<BaseGameObject*> GameObjects;
 	//!Sprite
-	//SFML Sprite
+	sf::Sprite Sprite;
 	//!Position
-	Vector2 Position;
-
-	void SendDataThroughNetwork();
-
-
+	sf::Vector2f Position;
+	b2Body* myBody;
+	b2BodyDef* bodyDef;
+	void UpdatePostition();
 };
 
