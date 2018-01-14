@@ -4,7 +4,7 @@
 
 SFMLRenderWindow::SFMLRenderWindow()
 {
-	window = new sf::RenderWindow(sf::VideoMode(200, 200), "Game window!");
+	window = new sf::RenderWindow(sf::VideoMode(1000, 550), "Game window!");
 }
 
 

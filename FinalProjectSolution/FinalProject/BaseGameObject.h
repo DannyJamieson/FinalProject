@@ -5,6 +5,7 @@
 class BaseGameObject
 {
 public:
+	BaseGameObject();
 	BaseGameObject(bool);
 	~BaseGameObject();
 	//!List of game objects
@@ -13,6 +14,7 @@ public:
 	sf::Sprite Sprite;
 	//!Position
 	sf::Vector2f Position;
+	static Physics *physics;
 	b2Body* myBody;
 	b2BodyDef* bodyDef;
 	void UpdatePostition();

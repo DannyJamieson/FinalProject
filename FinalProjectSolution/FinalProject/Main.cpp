@@ -2,14 +2,11 @@
 #include "SFMLRenderWindow.h"
 #include "Physics.h"
 
-bool DoPhysics = true;
+bool doPhysics = true;
 
+short fixedUpdatesPerSecond = 50;//Updates per seconds
 
-
-
-short FixedUpdatesPerSecond = 50;//Updates per seconds
-
-short  FixedUpdateSpeed = 1000/FixedUpdatesPerSecond;//time between FixedUpdates
+short  fixedUpdateSpeed = 1000/fixedUpdatesPerSecond;//time between FixedUpdates
 
 void CallFixedUpdate() { //Call all fixed updates
 	for each(BaseUpdateBehaviour* Behaviour in BaseUpdateBehaviour::UpdateBehaviours) {
@@ -24,21 +21,27 @@ void CallUpdate() {  //call all updates
 }
 
 void MainGameLoop() {
-	double LastFixedUpdate = clock();
-	Physics *i = new Physics();
+	double lastFixedUpdate = clock();
+	
 	while (true)
 	{
 		CallUpdate();
-		if(clock()-LastFixedUpdate > FixedUpdateSpeed){
-			LastFixedUpdate +=FixedUpdateSpeed;
+		if(clock()-lastFixedUpdate > fixedUpdateSpeed){
+			lastFixedUpdate +=fixedUpdateSpeed;
 			CallFixedUpdate();
 		}
 	}
 }
 
+void Init() {
+	Physics *physics = new Physics();
+	SFMLRenderWindow *renderWindow = new SFMLRenderWindow();
+
+}
+
 
 int main() {
-	SFMLRenderWindow *i = new SFMLRenderWindow();
+	Init();
 	MainGameLoop();
 	return 0;
 }

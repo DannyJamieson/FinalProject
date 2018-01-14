@@ -3,7 +3,7 @@
 
 std::vector<BaseGameObject*> BaseGameObject::GameObjects;//List of GameObjects
 
-Physics* physics = Physics::singleton;
+BaseGameObject::BaseGameObject(){}
 
 BaseGameObject::BaseGameObject(bool doPhysics)
 {
@@ -11,8 +11,8 @@ BaseGameObject::BaseGameObject(bool doPhysics)
 	if (doPhysics) {
 		physics = Physics::singleton;
 		bodyDef->position.Set(0, 0);
-		b2BodyDef i;
-		i.position.Set(0, 0);
+		b2BodyDef myBodyDef;
+		myBodyDef.position.Set(0, 0);
 		myBody = physics->getBody(bodyDef);
 	}
 }
@@ -25,7 +25,7 @@ BaseGameObject::~BaseGameObject()
 			break;
 		}
 	}
-	//physics->world->DestroyBody(myBody);
+	physics->world.DestroyBody(myBody);
 }
 
 void BaseGameObject::UpdatePostition() {

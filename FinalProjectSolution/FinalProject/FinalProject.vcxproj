@@ -117,6 +117,8 @@
   <ItemGroup>
     <ClCompile Include="BaseGameObject.cpp" />
     <ClCompile Include="BaseUpdateBehaviour.cpp" />
+    <ClCompile Include="CharacterControl.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="SFMLRenderWindow.cpp" />
@@ -124,6 +126,8 @@
   <ItemGroup>
     <ClInclude Include="BaseGameObject.h" />
     <ClInclude Include="BaseUpdateBehaviour.h" />
+    <ClInclude Include="CharacterControl.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="SFMLRenderWindow.h" />
   </ItemGroup>
