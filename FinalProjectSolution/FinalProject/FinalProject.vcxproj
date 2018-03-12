@@ -78,7 +78,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>./libs</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-window-d.lib;sfml-system.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,6 +119,7 @@
     <ClCompile Include="BaseUpdateBehaviour.cpp" />
     <ClCompile Include="CharacterControl.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LevelCreator.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="SFMLRenderWindow.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="BaseUpdateBehaviour.h" />
     <ClInclude Include="CharacterControl.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LevelCreator.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="SFMLRenderWindow.h" />
   </ItemGroup>

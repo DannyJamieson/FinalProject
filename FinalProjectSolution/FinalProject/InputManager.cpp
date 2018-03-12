@@ -7,7 +7,6 @@ InputManager::InputManager()
 	down = sf::Keyboard::S;
 	left = sf::Keyboard::A;
 	right = sf::Keyboard::D;
-	
 }
 
 

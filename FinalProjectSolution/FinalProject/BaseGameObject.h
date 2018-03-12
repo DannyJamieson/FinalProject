@@ -1,22 +1,47 @@
 #pragma once
+#include "BaseUpdateBehaviour.h"
 #include "SFML\Graphics.hpp"
 #include "Physics.h"
 #include <vector>
-class BaseGameObject
+#include <string>
+class BaseGameObject //: BaseUpdateBehaviour
 {
 public:
 	BaseGameObject();
-	BaseGameObject(bool);
+	BaseGameObject(bool,b2BodyDef*);
 	~BaseGameObject();
 	//!List of game objects
 	static std::vector<BaseGameObject*> GameObjects;
 	//!Sprite
-	sf::Sprite Sprite;
+	sf::CircleShape Sprite;
 	//!Position
 	sf::Vector2f Position;
-	static Physics *physics;
+	//public Physics* physics;
+	Physics *physics;
 	b2Body* myBody;
 	b2BodyDef* bodyDef;
 	void UpdatePostition();
 };
+
+
+struct RecievedSaveData
+{
+	int Source;
+	int DataIdentifier;
+	double SourceTimeSent;
+	std::string Message;
+	double LocalTimeRecieved;
+	double AckRecieved;
+};
+
+struct SentSaveData
+{
+	int Destination;
+	int DataIdentifier;
+	double SourceTimeSent;
+	std::string Message;
+};
+
+
+
 
