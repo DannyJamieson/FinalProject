@@ -10,6 +10,10 @@ InputManager::InputManager()
 		delete(this);
 }
 
+void InputManager::SetClientPointer(Client* client){
+	clientPointer = client;
+}
+
 
 InputManager::~InputManager()
 {
@@ -52,38 +56,46 @@ void InputManager::UpdateInputs() {
 #pragma region Pressed and Release Functions
 void InputManager::UpPressed(){
 	upPressed = true;
-	std::printf("Up Pressed\n");
+	std::printf("Input Manager : Up Pressed\n");
+	clientPointer->AmmendMessage("Up Pressed");
 }
 void InputManager::UpReleased() {
 	upPressed = false;
-	std::printf("Up Released\n");
+	std::printf("Input Manager : Up Released\n");
+	clientPointer->AmmendMessage("Up Released");
 }
 
 void InputManager::DownPressed() {
 	downPressed = true;
-	std::printf("Down Pressed\n");
+	std::printf("Input Manager : Down Pressed\n");
+	clientPointer->AmmendMessage("Down Pressed");
 }
 void InputManager::DownReleased() {
 	downPressed = false;
-	std::printf("Down Released\n");
+	std::printf("Input Manager : Down Released\n");
+	clientPointer->AmmendMessage("Down Released");
 }
 
 void InputManager::LeftPressed() {
 	leftPressed = true;
-	std::printf("Left Pressed\n");
+	std::printf("Input Manager : Left Pressed\n");
+	clientPointer->AmmendMessage("Left Pressed");
 }
 void InputManager::LeftReleased() {
 	leftPressed = false;
-	std::printf("Left Released\n");
+	std::printf("Input Manager : Left Released\n");
+	clientPointer->AmmendMessage("Left Released");
 }
 
 void InputManager::RightPressed() {
 	rightPressed = true;
-	std::printf("Right Pressed\n");
+	std::printf("Input Manager : Right Pressed\n");
+	clientPointer->AmmendMessage("Right Pressed");
 }
 void InputManager::RightReleased() {
 	rightPressed = false;
-	std::printf("Right Released\n");
+	std::printf("Input Manager : Right Released\n");
+	clientPointer->AmmendMessage("Right Released");
 }
 #pragma endregion
 

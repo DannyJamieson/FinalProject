@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML\Graphics.hpp"
+#include "Client.h"
 class InputManager
 {
 public:
@@ -7,6 +8,7 @@ public:
 	InputManager();
 	~InputManager();
 	void Update();
+	void SetClientPointer(Client*);
 private:
 	bool upPressed;
 	bool downPressed;
@@ -21,5 +23,6 @@ private:
 	void LeftReleased();
 	void RightPressed();
 	void RightReleased();
+	Client* clientPointer;
 };
 

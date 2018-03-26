@@ -5,6 +5,9 @@
 #include<winsock2.h>
 #include <string>
 #pragma comment(lib,"ws2_32.lib") //Winsock Library
+#include <thread>
+#include <list>
+#include <sstream>
 
 #define SERVER "127.0.0.1"  //ip address of udp server
 #define BUFLEN 512  //Max length of buffer
@@ -15,14 +18,21 @@ class Client
 public:
 	Client();
 	~Client();
-	int func();
+	void Reciever();
 	void Init();
-	void Send(std::string);
+	void CheckNewMessage();
+	void AmmendMessage(std::string);
 private:
+	
 	struct sockaddr_in si_other;
 	int s, slen;
 	char buf[BUFLEN];
 	char message[BUFLEN];
+	std::string messageToSend;
 	WSADATA wsa;
+	int messageCount;
+	struct MessageStruct;
+	std::list<MessageStruct*> messageList;
+	void SendList();
 };
 

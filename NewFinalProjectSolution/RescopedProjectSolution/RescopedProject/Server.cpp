@@ -25,10 +25,11 @@ int Server::func() {
 	slen = sizeof(si_other);
 
 	//Initialise winsock
-	printf("\nInitialising Winsock...");
+	printf("Server Initialising Winsock...\n");
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 	{
-		printf("Failed. Error Code : %d", WSAGetLastError());
+		printf("Server Failed. Error Code : %d", WSAGetLastError());
+		system("PAUSE");
 		exit(EXIT_FAILURE);
 	}
 	printf("Initialised.\n");
@@ -36,9 +37,9 @@ int Server::func() {
 	//Create a socket
 	if ((s = socket(AF_INET, SOCK_DGRAM, 0)) == INVALID_SOCKET)
 	{
-		printf("Could not create socket : %d", WSAGetLastError());
+		printf("Server Could not create socket : %d", WSAGetLastError());
 	}
-	printf("Socket created.\n");
+	printf("Server Socket created.\n");
 
 	//Prepare the sockaddr_in structure
 	server.sin_family = AF_INET;
@@ -48,39 +49,40 @@ int Server::func() {
 	//Bind
 	if (bind(s, (struct sockaddr *)&server, sizeof(server)) == SOCKET_ERROR)
 	{
-		printf("Bind failed with error code : %d", WSAGetLastError());
+		printf("Server Bind failed with error code : %d", WSAGetLastError());
+		system("PAUSE");
 		exit(EXIT_FAILURE);
 	}
-	puts("Bind done");
+	puts("Bind done\n");
 
 	//keep listening for data
 	while (1)
 	{
-		printf("Waiting for data...");
 		fflush(stdout);
-
 		//clear the buffer by filling null, it might have previously received data
 		memset(buf, '\0', BUFLEN);
 
 		//try to receive some data, this is a blocking call
 		if ((recv_len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen)) == SOCKET_ERROR)
 		{
-			printf("recvfrom() failed with error code : %d", WSAGetLastError());
-			//exit(EXIT_FAILURE);
+			printf("Server recvfrom() failed with error code : %d", WSAGetLastError());
+			system("PAUSE"); 
+			exit(EXIT_FAILURE);
 		}
 
 		//print details of the client/peer and the data received
-		printf("Received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
-		printf("Data: %s\n", buf);
-
+		//printf("Server received packet from %s:%d\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
+		printf("Server data: %s\n", buf);
+		std::string returnMessage = returnMessageCount(buf) + " ACK";
 		//now reply the client with the same data
-		if (sendto(s, buf, recv_len, 0, (struct sockaddr*) &si_other, slen) == SOCKET_ERROR)
+		if (sendto(s, returnMessage.c_str(), recv_len, 0, (struct sockaddr*) &si_other, slen) == SOCKET_ERROR)
 		{
-			printf("sendto() failed with error code : %d", WSAGetLastError());
+			printf("Server sendto() failed with error code : %d", WSAGetLastError());
+			system("PAUSE");
 			exit(EXIT_FAILURE);
 		}
-		sendto(s, buf, recv_len, 0, (struct sockaddr*) &si_other, slen);
-		sendto(s, buf, recv_len, 0, (struct sockaddr*) &si_other, slen);
+		std::string printString = "Server sent: " + returnMessage + "\n";
+		printf(printString.c_str());
 	}
 
 	closesocket(s);
@@ -89,6 +91,9 @@ int Server::func() {
 	return 0;
 }
 
+std::string Server::returnMessageCount(std::string inputMessage) {
+	return inputMessage.substr(0, inputMessage.find(','));
+}
 Server::Server()
 {
 }
