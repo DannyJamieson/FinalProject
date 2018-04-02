@@ -16,9 +16,7 @@ void StartClientReciever(Client *client) {
 }
 
 int main() {
-	
-	system("PAUSE");
-	std::thread first(StartServer);
+	//std::thread server(StartServer);
 	Client *client = new Client();
 	client->Init();
 	std::thread reciever(StartClientReciever, client);

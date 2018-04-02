@@ -4,6 +4,7 @@ struct Client::MessageStruct {
 	int messageID;
 	std::string message;
 };
+
 void Client::Reciever()
 {
 	messageToSend = "Connect";
@@ -14,12 +15,15 @@ void Client::Reciever()
 		//clear the buffer by filling null, it might have previously received data
 		memset(buf, '\0', BUFLEN);
 		//try to receive some data, this is a blocking call
-		int i = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen);
-		if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen) == SOCKET_ERROR)
+		int recieveInt = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *) &si_other, &slen);
+		if (recieveInt == SOCKET_ERROR)
 		{
 			printf("Client recvfrom() failed with error code : %d", WSAGetLastError());
 			system("PAUSE");
 			//exit(EXIT_FAILURE);
+		}
+		if (buf[0] == 0) {
+			continue;
 		}
 		printf("Client recieved: ");
 		printf(buf);
@@ -40,13 +44,11 @@ void Client::Reciever()
 		if (itemToDelete != NULL) {
 			messageList.remove(itemToDelete);
 			itemToDelete = NULL;
-			delete(itemToDelete);
 		}
+		delete(itemToDelete);
 	}
-
 	closesocket(s);
 	WSACleanup();
-
 	return;
 }
 
@@ -61,7 +63,6 @@ void Client::Init() {
 		exit(EXIT_FAILURE);
 	}
 	printf("Initialised Winsock on Client.\n");
-
 
 	//create socket
 	if ((s = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == SOCKET_ERROR)
@@ -80,7 +81,6 @@ void Client::Init() {
 	messageToSend = "";
 }
 
-
 void Client::CheckNewMessage() {
 	if (messageToSend != "") {
 		MessageStruct *newMessage = new MessageStruct();
@@ -89,32 +89,28 @@ void Client::CheckNewMessage() {
 		messageList.push_back(newMessage);
 		messageToSend = "";
 	}
-	if (messageList.size() > 0)
+	if (messageList.size() > 0) {
 		SendList();
+	}
 }
 
 void Client::SendList() {
 	for each (MessageStruct *currentItem in messageList)
 	{
-	std::string sendThis = std::to_string(currentItem->messageID) + "," + currentItem->message;
-	strcpy(message, sendThis.c_str());
-	if (sendto(s, message, strlen(message), 0, (struct sockaddr *) &si_other, slen) == SOCKET_ERROR)
-	{
-		printf("sendto() failed with error code : %d", WSAGetLastError());
-		system("PAUSE");
-		exit(EXIT_FAILURE);
+		std::string sendThis = std::to_string(currentItem->messageID) + "," + currentItem->message;
+		strcpy(message, sendThis.c_str());
+		if (sendto(s, message, strlen(message), 0, (struct sockaddr *) &si_other, slen) == SOCKET_ERROR)
+		{
+			printf("sendto() failed with error code : %d", WSAGetLastError());
+			system("PAUSE");
+			exit(EXIT_FAILURE);
+		}
 	}
-
-
-
-	}
-
 }
 
 void Client::AmmendMessage(std::string addition) {
 	messageToSend += addition;
 }
-
 
 Client::Client()
 {
@@ -123,4 +119,3 @@ Client::Client()
 Client::~Client()
 {
 }
-
