@@ -29,6 +29,10 @@ int main() {
 			inputManager->Update();//call update on input manager
 			time += deltaTime;//update time
 			client->CheckNewMessage();
+			if (client->CloseProgram) {
+				reciever.detach();
+				break;
+			}
 		}
 	}
 	return 0;

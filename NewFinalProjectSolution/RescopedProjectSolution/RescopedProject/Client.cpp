@@ -3,6 +3,7 @@
 struct Client::MessageStruct {
 	int messageID;
 	std::string message;
+	clock_t startTime;
 };
 
 void Client::Reciever()
@@ -37,6 +38,13 @@ void Client::Reciever()
 		for each (MessageStruct *item in messageList)
 		{
 			if (item->messageID == messageInt) {
+				clock_t endTime = clock();
+				std::string newLine = std::to_string(item->messageID) + ","+ item->message +","+ std::to_string(endTime-item->startTime);
+				file->PrintToFile(newLine);
+				if (item->messageID > 100) {
+					file->CloseFile();
+					CloseProgram = true;
+				}
 				itemToDelete = item;
 				break;
 			}
@@ -53,6 +61,7 @@ void Client::Reciever()
 }
 
 void Client::Init() {
+	CloseProgram = false;
 	messageCount = 0;
 	slen = sizeof(si_other);
 	printf("Initialising Winsock for client...\n");
@@ -79,6 +88,8 @@ void Client::Init() {
 	memset(message, '\0', BUFLEN);
 	//start communication
 	messageToSend = "";
+	file = new File();
+	file->init();
 }
 
 void Client::CheckNewMessage() {
@@ -86,6 +97,7 @@ void Client::CheckNewMessage() {
 		MessageStruct *newMessage = new MessageStruct();
 		newMessage->messageID = messageCount++;
 		newMessage->message = messageToSend;
+		newMessage->startTime = clock();
 		messageList.push_back(newMessage);
 		messageToSend = "";
 	}
@@ -95,16 +107,21 @@ void Client::CheckNewMessage() {
 }
 
 void Client::SendList() {
-	for each (MessageStruct *currentItem in messageList)
-	{
-		std::string sendThis = std::to_string(currentItem->messageID) + "," + currentItem->message;
-		strcpy(message, sendThis.c_str());
-		if (sendto(s, message, strlen(message), 0, (struct sockaddr *) &si_other, slen) == SOCKET_ERROR)
+	try {
+		for each (MessageStruct *currentItem in messageList)
 		{
-			printf("sendto() failed with error code : %d", WSAGetLastError());
-			system("PAUSE");
-			exit(EXIT_FAILURE);
+			std::string sendThis = std::to_string(currentItem->messageID) + "," + currentItem->message;
+			strcpy(message, sendThis.c_str());
+			if (sendto(s, message, strlen(message), 0, (struct sockaddr *) &si_other, slen) == SOCKET_ERROR)
+			{
+				printf("sendto() failed with error code : %d", WSAGetLastError());
+				system("PAUSE");
+				exit(EXIT_FAILURE);
+			}
 		}
+	}
+	catch(const std::out_of_range& e){
+		printf("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 }
 

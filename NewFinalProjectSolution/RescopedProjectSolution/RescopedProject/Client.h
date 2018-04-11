@@ -8,8 +8,9 @@
 #include <thread>
 #include <list>
 #include <sstream>
+#include "File.h"
 
-#define SERVER "127.0.0.1"  //ip address of udp server
+#define SERVER "86.128.96.225"  //ip address of udp server
 #define BUFLEN 512  //Max length of buffer
 #define PORT 12345   //The port on which to listen for incoming data
 
@@ -22,6 +23,7 @@ public:
 	void Init();
 	void CheckNewMessage();
 	void AmmendMessage(std::string);
+	bool CloseProgram;
 private:
 	
 	struct sockaddr_in si_other;
@@ -34,5 +36,6 @@ private:
 	struct MessageStruct;
 	std::list<MessageStruct*> messageList;
 	void SendList();
+	File *file;
 };
 
