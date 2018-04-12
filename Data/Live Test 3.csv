@@ -1,0 +1,103 @@
+MessageID,Message,Latency
+0,Connect,59
+1,Left Pressed,38
+2,Left Released,31
+3,Right Pressed,33
+4,Right Released,88
+5,Right Pressed,54
+6,Right Released,33
+7,Right Pressed,26
+8,Right Released,58
+9,Left Pressed,25
+10,Left Released,44
+11,Left Pressed,29
+12,Left Released,23
+13,Left Pressed,24
+14,Left Released,26
+15,Left Pressed,24
+16,Left Released,26
+17,Right Pressed,23
+18,Right Released,24
+19,Right Pressed,24
+20,Right Released,23
+21,Right Pressed,23
+22,Left Pressed,36
+23,Left Released,24
+24,Right Released,28
+25,Left Pressed,33
+26,Up Pressed,33
+27,Down Pressed,36
+28,Left Released,56
+29,Up Released,38
+30,Down Released,93
+31,Right Pressed,102
+32,Right Released,24
+33,Up Pressed,25
+34,Up Released,23
+35,Left Pressed,28
+36,Down PressedLeft Released,24
+37,Right Pressed,24
+38,Down Released,26
+39,Up Pressed,57
+40,Right Released,36
+41,Left Pressed,94
+42,Up Released,57
+43,Left Released,34
+44,Up Pressed,84
+45,Right Pressed,82
+46,Right Released,94
+47,Up ReleasedLeft Pressed,93
+48,Right Pressed,79
+49,Left Released,65
+50,Up Pressed,68
+51,Left Pressed,63
+52,Up Released,61
+53,Right Released,51
+54,Left Released,38
+55,Up PressedRight Pressed,24
+56,Up Released,48
+57,Right Released,34
+58,Left Pressed,31
+59,Left ReleasedRight Pressed,25
+60,Down Pressed,24
+61,Down Released,25
+62,Left PressedRight Released,36
+63,Left Released,27
+64,Right Pressed,37
+65,Up Pressed,39
+66,Right Released,34
+67,Up ReleasedLeft Pressed,25
+68,Left Released,25
+69,Right Pressed,32
+70,Up Pressed,26
+71,Left Pressed,23
+72,Right Released,37
+73,Up Released,24
+74,Left Released,23
+75,Up Pressed,24
+76,Up ReleasedLeft Pressed,25
+77,Left Released,29
+78,Left Pressed,25
+79,Left Released,24
+80,Left Pressed,26
+81,Left Released,24
+82,Left Pressed,26
+83,Left Released,24
+84,Right Pressed,24
+85,Right Released,23
+86,Right Pressed,23
+87,Right Released,23
+88,Left Pressed,24
+89,Left Released,24
+90,Left Pressed,50
+91,Left Released,24
+92,Left Pressed,23
+93,Left Released,26
+94,Right Pressed,40
+95,Down Pressed,24
+96,Right Released,33
+97,Down Released,27
+98,Up Pressed,23
+99,Up Released,24
+100,Left Pressed,26
+101,Left Released,24
